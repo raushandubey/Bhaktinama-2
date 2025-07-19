@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->string('address')->nullable()->after('phone');
+            $table->string('profile_image')->nullable()->after('address');
         });
     }
 
@@ -22,7 +23,31 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn(['address', 'profile_image']);
+        });
+    }
+};
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('address')->nullable()->after('phone');
+            $table->string('profile_image')->nullable()->after('address');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn(['address', 'profile_image']);
         });
     }
 };

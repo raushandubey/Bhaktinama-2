@@ -34,7 +34,7 @@
                 <a href="{{ route('user.profile.edit') }}" class="bg-white text-orange-500 px-4 py-2 rounded-full font-medium hover:bg-gray-100 transition duration-300">
                     Edit Profile
                 </a>
-                <a href="#" class="bg-white text-orange-500 px-4 py-2 rounded-full font-medium hover:bg-gray-100 transition duration-300">
+                <a href="{{ route('user.change-password') }}" class="bg-white text-orange-500 px-4 py-2 rounded-full font-medium hover:bg-gray-100 transition duration-300">
                     Change Password
                 </a>
             </div>

@@ -74,6 +74,8 @@ Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
     Route::put('/profile', [UserController::class, 'updateProfile'])->name('profile.update');
+    Route::get('/change-password', [UserController::class, 'showChangePasswordForm'])->name('change-password');
+    Route::put('/change-password', [UserController::class, 'updatePassword'])->name('change-password.update');
     Route::get('/bookings', [UserController::class, 'bookings'])->name('bookings');
     Route::get('/orders', [UserController::class, 'orders'])->name('orders');
 });

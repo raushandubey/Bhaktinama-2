@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Booking;
-use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use App\Models\User;
+use App\Models\Booking;
+use App\Models\Order;
 
 class UserController extends Controller
 {
@@ -251,5 +251,41 @@ class UserController extends Controller
             ->get();
             
         return view('user.orders', compact('orders'));
+    }
+    
+    /**
+     * Show change password form
+     */
+    public function showChangePasswordForm()
+    {
+        return view('user.change-password');
+    }
+    
+    /**
+     * Update user password
+     */
+    public function updatePassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+        
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+        
+        $user = Auth::user();
+        
+        // Check if current password is correct
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect.']);
+        }
+        
+        // Update password
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        
+        return redirect()->route('user.profile')->with('success', 'Password updated successfully');
     }
 }
