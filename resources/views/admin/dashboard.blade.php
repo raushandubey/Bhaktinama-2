@@ -130,7 +130,7 @@
                 <h2 class="text-lg font-semibold text-gray-900">Quick Actions</h2>
             </div>
             <div class="p-6 space-y-4">
-                <a href=" " class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                <a href="{{ route('admin.pandits') }} " class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
                     <div class="flex items-center space-x-3">
                         <div class="bg-blue-100 p-2 rounded-full">
                             <i class="fas fa-user-tie text-blue-500"></i>
@@ -140,7 +140,7 @@
                     <i class="fas fa-chevron-right text-gray-400"></i>
                 </a>
                 
-                <a href=" " class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                <a href="{{ route('admin.temples') }} " class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
                     <div class="flex items-center space-x-3">
                         <div class="bg-indigo-100 p-2 rounded-full">
                             <i class="fas fa-gopuram text-indigo-500"></i>
@@ -150,7 +150,7 @@
                     <i class="fas fa-chevron-right text-gray-400"></i>
                 </a>
                 
-                <a href=" " class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                <a href="{{ route('admin.products') }} " class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
                     <div class="flex items-center space-x-3">
                         <div class="bg-green-100 p-2 rounded-full">
                             <i class="fas fa-shopping-basket text-green-500"></i>
@@ -160,7 +160,7 @@
                     <i class="fas fa-chevron-right text-gray-400"></i>
                 </a>
                 
-                <a href=" " class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
+                <a href="{{ route('admin.orders') }} " class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-300">
                     <div class="flex items-center space-x-3">
                         <div class="bg-yellow-100 p-2 rounded-full">
                             <i class="fas fa-file-invoice text-yellow-500"></i>

@@ -36,8 +36,8 @@
         
     </header>
 
-    <!-- Available Online Service Section -->
-    <section class="py-16 bg-white">
+   <!-- Available Online Service Section -->
+   <section class="py-16 bg-white">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-12 text-gradient">Available Online Service</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -59,7 +59,7 @@
                 </a>
 
                 <!-- Service Card 2 -->
-                <a href="" class="group transform transition-transform duration-500 hover:-translate-x-4">
+                <a href="{{route('astrology')}}" class="group transform transition-transform duration-500 hover:-translate-x-4">
                     <div class="bg-white rounded-lg shadow-md overflow-hidden">
                         <div class="relative">
                             <img src="{{ asset('https://placehold.co/400x300/FEEBC8/FF7B00?text=Astrology') }}" alt="Astrology" class="w-full h-48 object-cover rounded-t-lg">
@@ -76,7 +76,7 @@
                 </a>
 
                 <!-- Service Card 3 -->
-                <a href="" class="group">
+                <a href="{{route('temple')}}" class="group">
                     <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
                         <div class="relative">
                             <img src="{{ asset('https://placehold.co/400x300/FEEBC8/FF7B00?text=Temple') }}" alt="Temple" class="w-full h-48 object-cover rounded-t-lg">
@@ -93,7 +93,7 @@
                 </a>
 
                 <!-- Service Card 4 -->
-                <a href="" class="group">
+                <a href="{{route('kundalini')}}" class="group">
                     <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
                         <div class="relative">
                             <img src="{{ asset('https://placehold.co/400x300/FEEBC8/FF7B00?text=Kundalini') }}" alt="Kundalini" class="w-full h-48 object-cover rounded-t-lg">
@@ -111,7 +111,6 @@
             </div>
         </div>
     </section>
-
 
     <!-- All Online Service Section -->
     <section class="py-16 bg-gray-50">

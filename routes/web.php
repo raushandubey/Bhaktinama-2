@@ -38,29 +38,64 @@ Route::middleware(['auth:pandit'])->prefix('pandit')->name('pandit.')->group(fun
     Route::post('/logout', [PanditController::class, 'logout'])->name('logout');
 });
 
-// Admin Routes
-Route::prefix('admin')->name('admin.')->group(function () {
-    // Admin Authentication
-    Route::post('/login', [AdminController::class, 'login'])->name('login.submit');
-    
-    // Admin Dashboard Routes (protected by middleware in real implementation)
+// Admin Authentication Routes (Public)
+Route::get('/adminlogin', [AdminController::class, 'showLoginForm'])->name('adminlogin');
+Route::post('/adminlogin', [AdminController::class, 'login'])->name('admin.login.submit');
+
+// Admin Dashboard Routes (Protected)
+Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+    
+    // User Management
+    Route::get('/users', [AdminController::class, 'users'])->name('users');
+    Route::patch('/users/{id}/toggle-status', [AdminController::class, 'toggleUserStatus'])->name('users.toggle-status');
+    
+    // Booking Management
     Route::get('/bookings', [AdminController::class, 'bookings'])->name('bookings');
+    Route::patch('/bookings/{id}/status', [AdminController::class, 'updateBookingStatus'])->name('bookings.update-status');
     
     // Pandit Management
     Route::get('/pandits', [AdminController::class, 'pandits'])->name('pandits');
     Route::get('/pandits/create', [AdminController::class, 'createPandit'])->name('pandits.create');
     Route::post('/pandits', [AdminController::class, 'storePandit'])->name('pandits.store');
+    Route::patch('/pandits/{id}/toggle-status', [AdminController::class, 'togglePanditStatus'])->name('pandits.toggle-status');
     
     // Temple Management
     Route::get('/temples', [AdminController::class, 'temples'])->name('temples');
     Route::get('/temples/create', [AdminController::class, 'createTemple'])->name('temples.create');
     Route::post('/temples', [AdminController::class, 'storeTemple'])->name('temples.store');
+    Route::get('/temples/{id}/edit', [AdminController::class, 'editTemple'])->name('temples.edit');
+    Route::put('/temples/{id}', [AdminController::class, 'updateTemple'])->name('temples.update');
+    Route::delete('/temples/{id}', [AdminController::class, 'deleteTemple'])->name('temples.delete');
+    Route::patch('/temples/{id}/toggle-status', [AdminController::class, 'toggleTempleStatus'])->name('temples.toggle-status');
     
     // Product Management
     Route::get('/products', [AdminController::class, 'products'])->name('products');
     Route::get('/products/create', [AdminController::class, 'createProduct'])->name('products.create');
     Route::post('/products', [AdminController::class, 'storeProduct'])->name('products.store');
+    Route::get('/products/{id}/edit', [AdminController::class, 'editProduct'])->name('products.edit');
+    Route::put('/products/{id}', [AdminController::class, 'updateProduct'])->name('products.update');
+    Route::delete('/products/{id}', [AdminController::class, 'deleteProduct'])->name('products.delete');
+    
+    // Order Management
+    Route::get('/orders', [AdminController::class, 'orders'])->name('orders');
+    Route::patch('/orders/{id}/update-status', [AdminController::class, 'updateOrderStatus'])->name('orders.update-status');
+    
+    // Service Management
+    Route::get('/services', [AdminController::class, 'services'])->name('services');
+    Route::get('/services/create', [AdminController::class, 'createService'])->name('services.create');
+    Route::post('/services', [AdminController::class, 'storeService'])->name('services.store');
+    Route::get('/services/{id}/edit', [AdminController::class, 'editService'])->name('services.edit');
+    Route::put('/services/{id}', [AdminController::class, 'updateService'])->name('services.update');
+    Route::delete('/services/{id}', [AdminController::class, 'deleteService'])->name('services.delete');
+    Route::patch('/services/{id}/toggle-status', [AdminController::class, 'toggleServiceStatus'])->name('services.toggle-status');
+    
+    // Blog Management
+    Route::get('/blogs', [AdminController::class, 'blogs'])->name('blogs');
+    Route::get('/blogs/create', [AdminController::class, 'createBlog'])->name('blogs.create');
+    Route::post('/blogs', [AdminController::class, 'storeBlog'])->name('blogs.store');
+    Route::patch('/blogs/{id}/toggle-status', [AdminController::class, 'toggleBlogStatus'])->name('blogs.toggle-status');
 });
 
 // User Authentication Routes

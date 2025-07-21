@@ -8,20 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'name',
         'description',
+        'category',
         'price',
+        'stock_quantity',
         'image',
         'is_available'
     ];
-    
-    /**
-     * Get the orders for this product
-     */
+
+    protected $casts = [
+        'price' => 'decimal:2',
+        'is_available' => 'boolean',
+    ];
+
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
 }
+
+

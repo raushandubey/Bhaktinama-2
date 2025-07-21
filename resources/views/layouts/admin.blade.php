@@ -51,32 +51,41 @@
             <!-- Sidebar Content -->
             <div class="flex-1 overflow-y-auto py-4">
                 <nav class="flex flex-col space-y-2 px-4">
-                <a href="#" class="sidebar-link">
+                <a href="{{ route('admin.dashboard') }}" class="sidebar-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                     <i class="fas fa-home w-5"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="#" class="sidebar-link">
-                    <i class="fas fa-concierge-bell w-5"></i>
+                <a href="{{ route('admin.users') }}" class="sidebar-link {{ request()->routeIs('admin.users*') ? 'active' : '' }}">
+                    <i class="fas fa-users w-5"></i>
+                    <span>Users</span>
+                </a>
+                <a href="{{ route('admin.services') }}" class="sidebar-link {{ request()->routeIs('admin.services*') ? 'active' : '' }}">
+                    <i class="fas fa-concierge-bell"></i>
                     <span>Services</span>
                 </a>
-                <a href="#" class="sidebar-link">
+                <a href="{{ route('admin.pandits') }}" class="sidebar-link {{ request()->routeIs('admin.pandits*') ? 'active' : '' }}">
                     <i class="fas fa-user-tie w-5"></i>
                     <span>Pandits</span>
                 </a>
-                <a href="#" class="sidebar-link">
-                    <i class="fas fa-landmark w-5"></i>
+                <a href="{{ route('admin.temples') }}" class="sidebar-link {{ request()->routeIs('admin.temples*') ? 'active' : '' }}">
+                    <i class="fas fa-place-of-worship w-5"></i>
                     <span>Temples</span>
                 </a>
-                <a href="#" class="sidebar-link">
+                <a href="{{ route('admin.bookings') }}" class="sidebar-link {{ request()->routeIs('admin.bookings*') ? 'active' : '' }}">
+                    <i class="fas fa-calendar-check w-5"></i>
+                    <span>Bookings</span>
+                </a>
+                <a href="{{ route('admin.products') }}" class="sidebar-link {{ request()->routeIs('admin.products*') ? 'active' : '' }}">
                     <i class="fas fa-box w-5"></i>
                     <span>Products</span>
                 </a>
-                <a href="#" class="sidebar-link">
+                <a href="{{ route('admin.orders') }}" class="sidebar-link {{ request()->routeIs('admin.orders*') ? 'active' : '' }}">
                     <i class="fas fa-shopping-cart w-5"></i>
                     <span>Orders</span>
                 </a>
-                <a href="#" class="sidebar-link">
-                    <i class="fas fa-blog w-5"></i>
+               
+                <a href="{{ route('admin.blogs') }}" class="sidebar-link {{ request()->routeIs('admin.blogs*') ? 'active' : '' }}">
+                    <i class="fas fa-blog"></i>
                     <span>Blogs</span>
                 </a>
                 </nav>
@@ -84,10 +93,13 @@
             
             <!-- Sidebar Footer -->
             <div class="p-4 border-t border-gray-200">
-                <a href="{{route('homepage')}}" class="sidebar-link text-gray-700">
-                <i class="fas fa-sign-out-alt w-5"></i>
-                <span>Logout</span>
-                </a>
+                <form method="POST" action="{{ route('admin.logout') }}">
+                    @csrf
+                    <button type="submit" class="sidebar-link text-gray-700 w-full text-left">
+                        <i class="fas fa-sign-out-alt w-5"></i>
+                        <span>Logout</span>
+                    </button>
+                </form>
             </div>
             </div>
         </aside>
@@ -120,7 +132,7 @@
                         <div class="relative">
                             <button class="flex items-center space-x-2 text-sm focus:outline-none">
                                 <img class="h-8 w-8 rounded-full object-cover" src="https://placehold.co/80x80/FFDDC1/FF7B00?text=Admin" alt="Admin">
-                                <span class="hidden md:block font-medium text-gray-700">Admin User</span>
+                                <span class="hidden md:block font-medium text-gray-700">{{ Auth::guard('admin')->user()->name ?? 'Admin User' }}</span>
                             </button>
                         </div>
                     </div>
@@ -129,6 +141,18 @@
 
             <!-- Page Content -->
             <main class="flex-1 overflow-y-auto bg-gray-50 p-4 sm:p-6 lg:p-8">
+                @if(session('success'))
+                    <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                        <span class="block sm:inline">{{ session('success') }}</span>
+                    </div>
+                @endif
+                
+                @if(session('error'))
+                    <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <span class="block sm:inline">{{ session('error') }}</span>
+                    </div>
+                @endif
+                
                 @yield('content')
             </main>
         </div>
