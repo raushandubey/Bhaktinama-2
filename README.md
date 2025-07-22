@@ -1,3 +1,94 @@
+Pujapandit
+Pujapandit is a web application built with Laravel, designed to manage services, products, bookings, temples, blogs, and more for a religious or spiritual platform.
+
+Features
+Admin panel for managing users, bookings, pandits, temples, products, orders, services, and blogs
+User authentication and registration
+Service and product management
+Blog and content management
+Booking and order tracking
+Image uploads for products, services, and temples
+Project Structure
+app/Models/ – Eloquent models for core entities (User, Product, Service, etc.)
+app/Http/Controllers/ – Controllers for handling business logic
+database/migrations/ – Migration files for database schema
+resources/views/ – Blade templates for frontend and admin views
+routes/web.php – Web routes for the application
+public/ – Public assets (images, CSS, JS)
+Setup Instructions
+1.
+Clone the repository:
+Bash
+
+
+
+Run
+git clone <your-repo-url>
+2.
+Install dependencies:
+Bash
+
+
+
+Run
+composer installnpm installnpm run build
+3.
+Copy and configure environment file:
+Bash
+
+
+
+Run
+cp .env.example .env# Edit .env to set your database and mail credentials
+4.
+Generate application key:
+Bash
+
+
+
+Run
+php artisan key:generate
+5.
+Run migrations and seeders:
+Bash
+
+
+
+Run
+php artisan migrate --seed
+6.
+Start the development server:
+Bash
+
+
+
+Run
+php artisan serve
+Useful Artisan Commands
+Clear cache: php artisan config:clear && php artisan cache:clear && php artisan route:clear && php artisan view:clear
+List routes: php artisan route:list
+Contribution
+Feel free to fork the repository and submit pull requests. Please follow PSR coding standards and include tests where applicable.
+
+License
+This project is open-source and available under the MIT license.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
