@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Booking;
 use App\Models\Order;
+use App\Models\Service;
+use App\Models\blog;
+use App\Models\Temple;
+use App\Models\Product;
+
 
 class UserController extends Controller
 {
@@ -20,17 +25,20 @@ class UserController extends Controller
 
     function services()
     {
-        return view("services");
+        $data['services']=Service::all();
+        return view("services",$data);
     }
     function shop()
     {
-        return view("shop");
+          $data['shop']=Product::all();
+        return view("shop",$data, $data);
     }
     function about() {
         return view("about");
     }
     function blog() {
-        return view("blog");
+        $data['blog']=Blog::all();
+        return view("blog",$data);
     }
     function contact() {
         return view("contact");
@@ -52,15 +60,19 @@ class UserController extends Controller
         return view("panditregister");
     }
      function bookpandit() {
-        return view("bookpandit");
+        $data['bookpandit']=Service::all();
+        return view("bookpandit",$data);
     }
      function astrology() {
+      
         return view("astrology");
     }
      function temple() {
-        return view("temple");
+        $data['temple']=Temple::all();
+        return view("temple",$data);
     }
      function kundalini() {
+       
         return view("kundalini");
     }
 

@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->string('category')->nullable()->after('description');
+            $table->string('Product_Name')->nullable()->after('Name'); // Give a proper after, or remove if unsure
             $table->integer('stock_quantity')->default(0)->after('price');
         });
     }
@@ -17,7 +18,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn(['category', 'stock_quantity']);
+            $table->dropColumn(['category', 'Product_Name', 'stock_quantity']);
         });
     }
 };

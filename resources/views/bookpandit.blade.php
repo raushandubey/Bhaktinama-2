@@ -85,94 +85,13 @@
     <main class="flex-grow container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Annaprashan Sanskar Puja Card -->
+@foreach($bookpandit as $item) 
             <div class="card">
                 <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Annaprashan" alt="Annaprashan Sanskar Puja" class="card-image">
-                <div class="card-title">Annaprashan Sanskar Puja</div>
+                <div class="card-title">{{$item->title}}</div>
             </div>
 
-            <!-- Satyanarayan Puja Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Satyanarayan" alt="Satyanarayan Puja" class="card-image">
-                <div class="card-title">Satyanarayan Puja</div>
-            </div>
-
-            <!-- Bhoomi Puja Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Bhoomi" alt="Bhoomi Puja" class="card-image">
-                <div class="card-title">Bhoomi Puja</div>
-            </div>
-
-            <!-- Griha Pravesh Puja Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Griha+Pravesh" alt="Griha Pravesh Puja" class="card-image">
-                <div class="card-title">Griha Pravesh Puja</div>
-            </div>
-
-            <!-- New Office Opening Puja Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Office+Opening" alt="New Office Opening Puja" class="card-image">
-                <div class="card-title">New Office Opening Puja</div>
-            </div>
-
-            <!-- Vivah - Marriage Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Vivah" alt="Vivah - Marriage" class="card-image">
-                <div class="card-title">Vivah - Marriage</div>
-            </div>
-
-            <!-- Vishwakarma Puja Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Vishwakarma" alt="Vishwakarma Puja" class="card-image">
-                <div class="card-title">Vishwakarma Puja</div>
-            </div>
-
-            <!-- Yagnopavit Sanskar Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Yagnopavit" alt="Yagnopavit Sanskar" class="card-image">
-                <div class="card-title">Yagnopavit Sanskar</div>
-            </div>
-
-            <!-- Saraswati Pooja Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Saraswati" alt="Saraswati Pooja" class="card-image">
-                <div class="card-title">Saraswati Pooja</div>
-            </div>
-
-            <!-- Rudrabhishek Puja Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Rudrabhishek" alt="Rudrabhishek Puja" class="card-image">
-                <div class="card-title">Rudrabhishek Puja</div>
-            </div>
-
-            <!-- Engagement Ceremony - Sagai Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Engagement" alt="Engagement Ceremony - Sagai" class="card-image">
-                <div class="card-title">Engagement Ceremony - Sagai</div>
-            </div>
-
-            <!-- Naming Ceremony Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Naming" alt="Naming Ceremony" class="card-image">
-                <div class="card-title">Naming Ceremony</div>
-            </div>
-
-            <!-- Ganesh Chaturthi Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Ganesh+Chaturthi" alt="Ganesh Chaturthi" class="card-image">
-                <div class="card-title">Ganesh Chaturthi</div>
-            </div>
-
-            <!-- Vehicle/Vahan Puja Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Vehicle+Puja" alt="Vehicle/Vahan Puja" class="card-image">
-                <div class="card-title">Vehicle/Vahan Puja</div>
-            </div>
-
-            <!-- Mundan Sanskar Puja Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Mundan+Sanskar" alt="Mundan Sanskar Puja" class="card-image">
-                <div class="card-title">Mundan Sanskar Puja</div>
-            </div>
+@endforeach  
         </div>
 
         <!-- Pagination -->

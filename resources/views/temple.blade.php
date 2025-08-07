@@ -83,76 +83,16 @@
     <!-- Main Content Section - Temple Service Cards -->
     <main class="flex-grow container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        @foreach($temple as $item)
             <!-- Jain Temple Card -->
             <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Jain+Temple" alt="Jain Temple" class="card-image">
-                <div class="card-title">Jain Temple</div>
-            </div>
+                <img src="{{ asset('uploads/' . $item->image) }}" alt="" class="card-image">
 
-            <!-- Ambika Niketan Temple Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Ambika+Niketan" alt="Ambika Niketan Temple" class="card-image">
-                <div class="card-title">Ambika Niketan Temple</div>
+                <div class="card-title">{{$item->name}}</div>
+                <div class="card-title">{{$item->entry_fee}}</div>
             </div>
-
-            <!-- Gayatri Temple Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Gayatri+Temple" alt="Gayatri Temple" class="card-image">
-                <div class="card-title">Gayatri Temple</div>
-            </div>
-
-            <!-- Balaji Mandir Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Balaji+Mandir" alt="Balaji Mandir" class="card-image">
-                <div class="card-title">Balaji Mandir</div>
-            </div>
-
-            <!-- Siddhnath Mahadev Temple Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Siddhnath+Mahadev" alt="Siddhnath Mahadev Temple" class="card-image">
-                <div class="card-title">Siddhnath Mahadev Temple</div>
-            </div>
-
-            <!-- Hanuman Temple Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Hanuman+Temple" alt="Hanuman Temple" class="card-image">
-                <div class="card-title">Hanuman Temple</div>
-            </div>
-
-            <!-- Kanteshwar Mandir Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Kanteshwar+Mandir" alt="Kanteshwar Mandir" class="card-image">
-                <div class="card-title">Kanteshwar Mandir</div>
-            </div>
-
-            <!-- Shree Agam Mandir Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Shree+Aagam+Mandir" alt="Shree Agam Mandir" class="card-image">
-                <div class="card-title">Shree Agam Mandir</div>
-            </div>
-
-            <!-- Annapurna Mata Mandir Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Annapurna+Mata" alt="Annapurna Mata Mandir" class="card-image">
-                <div class="card-title">Annapurna Mata Mandir</div>
-            </div>
-
-            <!-- Gangeshwar Mandir Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Gangeshwar+Mandir" alt="Gangeshwar Mandir" class="card-image">
-                <div class="card-title">Gangeshwar Mandir</div>
-            </div>
-
-            <!-- Old Ambaji Mandir Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Old+Ambaji+Mandir" alt="Old Ambaji Mandir" class="card-image">
-                <div class="card-title">Old Ambaji Mandir</div>
-            </div>
-
-            <!-- Shri Shirdi Sai Baba Temple Card -->
-            <div class="card">
-                <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Shirdi+Sai+Baba" alt="Shri Shirdi Sai Baba Temple" class="card-image">
-                <div class="card-title">Shri Shirdi Sai Baba Temple</div>
+        @endforeach
             </div>
 
 

@@ -52,67 +52,34 @@
     <!-- Blog Content Section -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4 flex flex-col lg:flex-row gap-8">
+            
             <!-- Main Blog Posts Area -->
             <div class="lg:w-3/4">
                 <h2 class="text-3xl font-bold mb-8 text-gradient">Latest Blog Posts</h2>
                 <div class="grid grid-cols-1 gap-8">
+                    @foreach($blog as $item)
                     <!-- Blog Post 1 -->
+        
                     <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row transform transition duration-300 hover:scale-105">
                         <img src="{{ asset('https://placehold.co/400x300/FFDDC1/FF7B00?text=Blog+Post+1') }}" alt="Top 10 Famous Hindu Saints" class="w-full md:w-1/3 h-48 md:h-auto object-cover rounded-t-lg md:rounded-l-lg md:rounded-tr-none">
                         <div class="p-6 flex-1 text-left">
                             <div class="flex items-center text-gray-500 text-sm mb-2">
-                                <i class="far fa-calendar-alt mr-2"></i><span>May 14, 2025</span>
+                                <i class="far fa-calendar-alt mr-2"></i><span>{{$item->date}}</span>
                                 <span class="mx-2">•</span>
-                                <i class="fas fa-tag mr-2"></i><span>Spirituality</span>
+                                <i class="fas fa-tag mr-2"></i><span>{{$item->category}}</span>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Top 10 Famous Hindu Saints Who Are Still Inspiring India Today</h3>
-                            <p class="text-gray-700 mb-4">Discover the lives and teachings of revered saints who continue to influence spiritual paths across India.</p>
+                            <h3 class="text-xl font-semibold mb-2">{{$item->title}}</h3>
+                            <p class="text-gray-700 mb-4">{{$item->meta_title}}</p>
                             <a href="#" class="text-orange-500 hover:underline font-medium">Read More</a>
                         </div>
+                        
                     </div>
+                    
                     <!-- Blog Post 2 -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row transform transition duration-300 hover:scale-105">
-                        <img src="{{ asset('https://placehold.co/400x300/FFDDC1/FF7B00?text=Blog+Post+2') }}" alt="Pandit for Puja Near Me" class="w-full md:w-1/3 h-48 md:h-auto object-cover rounded-t-lg md:rounded-l-lg md:rounded-tr-none">
-                        <div class="p-6 flex-1 text-left">
-                            <div class="flex items-center text-gray-500 text-sm mb-2">
-                                <i class="far fa-calendar-alt mr-2"></i><span>June 19, 2025</span>
-                                <span class="mx-2">•</span>
-                                <i class="fas fa-tag mr-2"></i><span>Spirituality</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-2">Pandit for Puja Near Me: How to Find the Right Priest for Every Occasion</h3>
-                            <p class="text-gray-700 mb-4">A guide to finding the perfect pandit for your religious ceremonies, ensuring authenticity and devotion.</p>
-                            <a href="#" class="text-orange-500 hover:underline font-medium">Read More</a>
-                        </div>
-                    </div>
-                    <!-- Blog Post 3 -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row transform transition duration-300 hover:scale-105">
-                        <img src="{{ asset('https://placehold.co/400x300/FFDDC1/FF7B00?text=Blog+Post+3') }}" alt="Happy Guru Purnima" class="w-full md:w-1/3 h-48 md:h-auto object-cover rounded-t-lg md:rounded-l-lg md:rounded-tr-none">
-                        <div class="p-6 flex-1 text-left">
-                            <div class="flex items-center text-gray-500 text-sm mb-2">
-                                <i class="far fa-calendar-alt mr-2"></i><span>June 19, 2025</span>
-                                <span class="mx-2">•</span>
-                                <i class="fas fa-tag mr-2"></i><span>Festival Fast</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-2">Happy Guru Purnima 2025: Significance, Story, and Wishes to Celebrate Your Guiding Light</h3>
-                            <p class="text-gray-700 mb-4">Learn about the importance of Guru Purnima and how to honor your teachers and mentors.</p>
-                            <a href="#" class="text-orange-500 hover:underline font-medium">Read More</a>
-                        </div>
-                    </div>
-                    <!-- Blog Post 4 -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row transform transition duration-300 hover:scale-105">
-                        <img src="{{ asset('https://placehold.co/400x300/FFDDC1/FF7B00?text=Blog+Post+4') }}" alt="Mathura & Vrindavan" class="w-full md:w-1/3 h-48 md:h-auto object-cover rounded-t-lg md:rounded-l-lg md:rounded-tr-none">
-                        <div class="p-6 flex-1 text-left">
-                            <div class="flex items-center text-gray-500 text-sm mb-2">
-                                <i class="far fa-calendar-alt mr-2"></i><span>June 19, 2025</span>
-                                <span class="mx-2">•</span>
-                                <i class="fas fa-tag mr-2"></i><span>Temple Mandir</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-2">Mathura & Vrindavan: Top Tourist Places, Temples, and the Divine Significance of Radha Krishna Dham.</h3>
-                            <p class="text-gray-700 mb-4">Explore the spiritual journey through the sacred lands of Mathura and Vrindavan.</p>
-                            <a href="#" class="text-orange-500 hover:underline font-medium">Read More</a>
-                        </div>
-                    </div>
+                      @endforeach
+                     
                 </div>
+              
 
                 <!-- Pagination -->
                 <div class="flex justify-center items-center space-x-2 mt-12">

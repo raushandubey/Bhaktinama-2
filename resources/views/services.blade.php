@@ -117,90 +117,17 @@
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-12 text-gradient">All Online Service</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+
+        @foreach($services as $item)   
                 <!-- Service Item 1: Annaprashan Sanskar Puja -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                    <img src="{{ asset('https://placehold.co/400x300/FFDDC1/FF7B00?text=Annaprashan') }}" alt="Annaprashan Sanskar Puja" class="w-full h-48 object-cover rounded-t-lg">
+                    <img src="{{ asset('uploads/' . $item->image) }}" alt="Annaprashan Sanskar Puja" class="w-full h-48 object-cover rounded-t-lg">
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold">Annaprashan Sanskar Puja</h3>
+                        <h3 class="text-lg font-semibold">{{$item->title}}</h3>
                     </div>
                 </div>
-                <!-- Service Item 2: Satyanarayan Puja -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                    <img src="{{ asset('https://placehold.co/400x300/FFDDC1/FF7B00?text=Satyanarayan') }}" alt="Satyanarayan Puja" class="w-full h-48 object-cover rounded-t-lg">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold">Satyanarayan Puja</h3>
-                    </div>
-                </div>
-                <!-- Service Item 3: Bhoomi Puja -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                    <img src="{{ asset('https://placehold.co/400x300/FFDDC1/FF7B00?text=Bhoomi') }}" alt="Bhoomi Puja" class="w-full h-48 object-cover rounded-t-lg">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold">Bhoomi Puja</h3>
-                    </div>
-                </div>
-                <!-- Service Item 4: Ayush Havan -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                    <img src="{{ asset('https://placehold.co/400x300/FFDDC1/FF7B00?text=Ayush') }}" alt="Ayush Havan" class="w-full h-48 object-cover rounded-t-lg">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold">Ayush Havan</h3>
-                    </div>
-                </div>
-                <!-- Service Item 5: Lakshmi Kubera Havan -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                    <img src="{{ asset('https://placehold.co/400x300/FFDDC1/FF7B00?text=Lakshmi') }}" alt="Lakshmi Kubera Havan" class="w-full h-48 object-cover rounded-t-lg">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold">Lakshmi Kubera Havan</h3>
-                    </div>
-                </div>
-                <!-- Service Item 6: Maha Mrityunjaya Jaap Puja -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                    <img src="{{ asset('https://placehold.co/400x300/FFDDC1/FF7B00?text=Mrityunjaya') }}" alt="Maha Mrityunjaya Jaap Puja" class="w-full h-48 object-cover rounded-t-lg">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold">Maha Mrityunjaya Jaap Puja</h3>
-                    </div>
-                </div>
-                <!-- Service Item 7: Santan Gopal Mantra Jaap -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                    <img src="{{ asset('https://placehold.co/400x300/FFDDC1/FF7B00?text=Santan') }}" alt="Santan Gopal Mantra Jaap" class="w-full h-48 object-cover rounded-t-lg">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold">Santan Gopal Mantra Jaap</h3>
-                    </div>
-                </div>
-                <!-- Service Item 8: Janam Kundali Creation -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                    <img src="{{ asset('https://placehold.co/400x300/FFDDC1/FF7B00?text=Kundali') }}" alt="Janam Kundali Creation" class="w-full h-48 object-cover rounded-t-lg">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold">Janam Kundali Creation</h3>
-                    </div>
-                </div>
-                <!-- Service Item 9: Kaal Sarp Dosh Check & Nivaran -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                    <img src="{{ asset('https://placehold.co/400x300/FFDDC1/FF7B00?text=Kaal Sarp') }}" alt="Kaal Sarp Dosh Check & Nivaran" class="w-full h-48 object-cover rounded-t-lg">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold">Kaal Sarp Dosh Check & Nivaran</h3>
-                    </div>
-                </div>
-                <!-- Service Item 10: Kundali Matching -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                    <img src="{{ asset('https://placehold.co/400x300/FFDDC1/FF7B00?text=Matching') }}" alt="Kundali Matching" class="w-full h-48 object-cover rounded-t-lg">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold">Kundali Matching</h3>
-                    </div>
-                </div>
-                <!-- Service Item 11: Personal Horoscope Reading -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                    <img src="{{ asset('https://placehold.co/400x300/FFDDC1/FF7B00?text=Horoscope') }}" alt="Personal Horoscope Reading" class="w-full h-48 object-cover rounded-t-lg">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold">Personal Horoscope Reading</h3>
-                    </div>
-                </div>
-                <!-- Service Item 12: Career & Business Astrology Guidance -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                    <img src="{{ asset('https://placehold.co/400x300/FFDDC1/FF7B00?text=Career Astrology') }}" alt="Career & Business Astrology Guidance" class="w-full h-48 object-cover rounded-t-lg">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold">Career & Business Astrology Guidance</h3>
-                    </div>
-                </div>
+                
+                @endforeach
             </div>
 
             <!-- Pagination -->
