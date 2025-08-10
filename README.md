@@ -38,7 +38,7 @@ PujaPandit is a comprehensive web platform built with Laravel that connects user
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/pujapandit.git
+git clone https://github.com/yourusername/Bhaktinama-2.git
 cd pujapandit
 ```
 
