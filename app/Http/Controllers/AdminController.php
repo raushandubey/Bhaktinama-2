@@ -23,39 +23,39 @@ class AdminController extends Controller
     {
         return view('adminlogin');
     }
-    
+
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
         ]);
-        
+
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-        
+
         $credentials = $request->only('email', 'password');
-        
+
         if (Auth::guard('admin')->attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
             return redirect()->intended(route('admin.dashboard'));
         }
-        
+
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->withInput();
     }
-    
+
     public function logout(Request $request)
     {
         Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        
+
         return redirect()->route('adminlogin')->with('success', 'Logged out successfully.');
     }
-    
+
     // Dashboard
     public function dashboard()
     {
@@ -67,36 +67,36 @@ class AdminController extends Controller
             'pending_bookings' => Booking::where('status', 'pending')->count(),
             'active_pandits' => Pandit::where('is_active', true)->count(),
         ];
-        
+
         $recent_bookings = Booking::with(['user', 'pandit'])
             ->latest()
             ->take(5)
             ->get();
-            
+
         $recent_orders = Order::with('user')
             ->latest()
             ->take(5)
             ->get();
-        
+
         return view('admin.dashboard', compact('stats', 'recent_bookings', 'recent_orders'));
     }
-    
+
     // User Management
     public function users()
     {
         $users = User::latest()->paginate(20);
         return view('admin.users', compact('users'));
     }
-    
+
     public function toggleUserStatus($id)
     {
         $user = User::findOrFail($id);
         $user->is_active = !$user->is_active;
         $user->save();
-        
+
         return back()->with('success', 'User status updated successfully.');
     }
-    
+
     // Bookings
     public function bookings()
     {
@@ -105,80 +105,90 @@ class AdminController extends Controller
             ->paginate(20);
         return view('admin.bookings', compact('bookings'));
     }
-    
+
     public function updateBookingStatus(Request $request, $id)
     {
         $booking = Booking::findOrFail($id);
         $booking->status = $request->status;
         $booking->save();
-        
+
         return back()->with('success', 'Booking status updated successfully.');
     }
-    
+
     // Pandit Management
     public function pandits()
     {
         $pandits = Pandit::latest()->paginate(20);
         return view('admin.pandits', compact('pandits'));
     }
-    
+
     public function createPandit()
     {
         return view('admin.add-pandit');
     }
-    
+
     public function storePandit(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:pandits',
+            'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
             'phone' => 'required|string|max:15',
-            'password' => 'required|string|min:6',
+            // 'password' => 'required|string|min:6',
             'specialization' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'bio' => 'nullable|string',
         ]);
-        
+
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-        
+        // Handle profile image upload
+        $profileImagePath = null;
+        if ($request->hasFile('profile_image')) {
+            $imageName = time() . '.' . $request->profile_image->extension();
+            $request->profile_image->move(public_path('images/pandits'), $imageName
+            );
+            $profileImagePath = 'images/pandits/' . $imageName;
+        }
+
         Pandit::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'password' => Hash::make($request->password),
+            'profile_image' => $profileImagePath,
+            'password'       => Hash::make('pandit@123'),
             'specialization' => $request->specialization,
             'location' => $request->location,
             'bio' => $request->bio,
             'is_verified' => true,
             'is_active' => true,
         ]);
-        
+
         return redirect()->route('admin.pandits')->with('success', 'Pandit added successfully.');
     }
-    
+
     public function togglePanditStatus($id)
     {
         $pandit = Pandit::findOrFail($id);
         $pandit->is_active = !$pandit->is_active;
         $pandit->save();
-        
+
         return back()->with('success', 'Pandit status updated successfully.');
     }
-    
+
     // Product Management
     public function products()
     {
         $products = Product::latest()->paginate(20);
         return view('admin.products', compact('products'));
     }
-    
+
     public function createProduct()
     {
         return view('admin.add-product');
     }
-    
+
     public function storeProduct(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -189,38 +199,38 @@ class AdminController extends Controller
             'stock_quantity' => 'required|integer|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        
+
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-        
+
         $data = $request->all();
-        
+
         // Handle image upload
         if ($request->hasFile('image')) {
-            $imageName = time().'.'.$request->image->extension();
+            $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('images/products'), $imageName);
-            $data['image'] = 'images/products/'.$imageName;
+            $data['image'] = 'images/products/' . $imageName;
         }
-        
+
         Product::create($data);
-        
+
         return redirect()->route('admin.products')->with('success', 'Product added successfully.');
     }
-    
+
     // Orders Management
     public function orders()
     {
         $orders = Order::with('user')->latest()->paginate(20);
         return view('admin.orders', compact('orders'));
     }
-    
+
     public function updateOrderStatus(Request $request, $id)
     {
         $order = Order::findOrFail($id);
         $order->status = $request->status;
         $order->save();
-        
+
         return back()->with('success', 'Order status updated successfully.');
     }
 
@@ -252,13 +262,13 @@ class AdminController extends Controller
             'latitude' => 'nullable|numeric|between:-90,90',
             'longitude' => 'nullable|numeric|between:-180,180',
         ]);
-    
+
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-    
+
         Temple::create($request->all());
-    
+
         return redirect()->route('admin.temples')->with('success', 'Temple added successfully.');
     }
 
@@ -267,7 +277,7 @@ class AdminController extends Controller
         $temple = Temple::findOrFail($id);
         $temple->is_active = !$temple->is_active;
         $temple->save();
-    
+
         return back()->with('success', 'Temple status updated successfully.');
     }
 
@@ -301,13 +311,13 @@ class AdminController extends Controller
             'faqs.*.question' => 'nullable|string|max:500',
             'faqs.*.answer' => 'nullable|string',
         ]);
-    
+
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-    
+
         $data = $request->all();
-        
+
         // Handle multiple image uploads
         if ($request->hasFile('images')) {
             $imagePaths = [];
@@ -318,17 +328,17 @@ class AdminController extends Controller
             }
             $data['images'] = $imagePaths;
         }
-    
+
         // Filter out empty packages
         if ($request->packages) {
-            $data['packages'] = array_filter($request->packages, function($package) {
+            $data['packages'] = array_filter($request->packages, function ($package) {
                 return !empty($package['name']) || !empty($package['price']);
             });
         }
-    
+
         // Filter out empty FAQs
         if ($request->faqs) {
-            $data['faqs'] = array_filter($request->faqs, function($faq) {
+            $data['faqs'] = array_filter($request->faqs, function ($faq) {
                 return !empty($faq['question']) || !empty($faq['answer']);
             });
         }
@@ -376,11 +386,11 @@ class AdminController extends Controller
         }
 
         $data = $request->all();
-        
+
         if ($request->hasFile('image')) {
-            $imageName = time().'.'.$request->image->extension();
+            $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('images/blogs'), $imageName);
-            $data['image'] = 'images/blogs/'.$imageName;
+            $data['image'] = 'images/blogs/' . $imageName;
         }
 
         if ($request->tags) {
@@ -417,7 +427,7 @@ class AdminController extends Controller
     public function updateProduct(Request $request, $id)
     {
         $product = Product::findOrFail($id);
-        
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -426,41 +436,41 @@ class AdminController extends Controller
             'stock_quantity' => 'required|integer|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        
+
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-        
+
         $data = $request->all();
-        
+
         // Handle image upload
         if ($request->hasFile('image')) {
             // Delete old image if exists
             if ($product->image && file_exists(public_path('images/products/' . basename($product->image)))) {
                 unlink(public_path('images/products/' . basename($product->image)));
             }
-            
-            $imageName = time().'.'.$request->image->extension();
+
+            $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('images/products'), $imageName);
-            $data['image'] = 'images/products/'.$imageName;
+            $data['image'] = 'images/products/' . $imageName;
         }
-        
+
         $product->update($data);
-        
+
         return redirect()->route('admin.products')->with('success', 'Product updated successfully.');
     }
 
     public function deleteProduct($id)
     {
         $product = Product::findOrFail($id);
-        
+
         // Delete associated image if exists
         if ($product->image && file_exists(public_path('images/products/' . basename($product->image)))) {
             unlink(public_path('images/products/' . basename($product->image)));
         }
-        
+
         $product->delete();
-        
+
         return back()->with('success', 'Product deleted successfully.');
     }
 
@@ -473,7 +483,7 @@ class AdminController extends Controller
     public function updateTemple(Request $request, $id)
     {
         $temple = Temple::findOrFail($id);
-        
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -489,41 +499,41 @@ class AdminController extends Controller
             'longitude' => 'nullable|numeric|between:-180,180',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        
+
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-        
+
         $data = $request->all();
-        
+
         // Handle image upload
         if ($request->hasFile('image')) {
             // Delete old image if exists
             if ($temple->image && file_exists(public_path('images/temples/' . basename($temple->image)))) {
                 unlink(public_path('images/temples/' . basename($temple->image)));
             }
-            
-            $imageName = time().'.'.$request->image->extension();
+
+            $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('images/temples'), $imageName);
-            $data['image'] = 'images/temples/'.$imageName;
+            $data['image'] = 'images/temples/' . $imageName;
         }
-        
+
         $temple->update($data);
-        
+
         return redirect()->route('admin.temples')->with('success', 'Temple updated successfully.');
     }
 
     public function deleteTemple($id)
     {
         $temple = Temple::findOrFail($id);
-        
+
         // Delete associated image if exists
         if ($temple->image && file_exists(public_path('images/temples/' . basename($temple->image)))) {
             unlink(public_path('images/temples/' . basename($temple->image)));
         }
-        
+
         $temple->delete();
-        
+
         return back()->with('success', 'Temple deleted successfully.');
     }
 
@@ -536,7 +546,7 @@ class AdminController extends Controller
     public function updateService(Request $request, $id)
     {
         $service = Service::findOrFail($id);
-        
+
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'short_description' => 'nullable|string|max:500',
@@ -553,13 +563,13 @@ class AdminController extends Controller
             'faqs.*.question' => 'nullable|string|max:500',
             'faqs.*.answer' => 'nullable|string',
         ]);
-    
+
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-    
+
         $data = $request->all();
-        
+
         // Handle multiple image uploads
         if ($request->hasFile('images')) {
             // Delete old images if exists
@@ -570,7 +580,7 @@ class AdminController extends Controller
                     }
                 }
             }
-            
+
             $imagePaths = [];
             foreach ($request->file('images') as $image) {
                 $imageName = time() . '_' . uniqid() . '.' . $image->extension();
@@ -579,17 +589,17 @@ class AdminController extends Controller
             }
             $data['images'] = $imagePaths;
         }
-    
+
         // Filter out empty packages
         if ($request->packages) {
-            $data['packages'] = array_filter($request->packages, function($package) {
+            $data['packages'] = array_filter($request->packages, function ($package) {
                 return !empty($package['name']) || !empty($package['price']);
             });
         }
-    
+
         // Filter out empty FAQs
         if ($request->faqs) {
-            $data['faqs'] = array_filter($request->faqs, function($faq) {
+            $data['faqs'] = array_filter($request->faqs, function ($faq) {
                 return !empty($faq['question']) || !empty($faq['answer']);
             });
         }
@@ -602,7 +612,7 @@ class AdminController extends Controller
     public function deleteService($id)
     {
         $service = Service::findOrFail($id);
-        
+
         // Delete associated images if exist
         if ($service->images && is_array($service->images)) {
             foreach ($service->images as $image) {
@@ -611,9 +621,9 @@ class AdminController extends Controller
                 }
             }
         }
-        
+
         $service->delete();
-        
+
         return back()->with('success', 'Service deleted successfully.');
     }
 }

@@ -35,7 +35,7 @@
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 h-10 w-10">
                                     <img class="h-10 w-10 rounded-full object-cover" 
-                                         src="{{ $pandit->profile_image ? asset('storage/' . $pandit->profile_image) : 'https://placehold.co/40x40/FFDDC1/FF7B00?text=' . substr($pandit->name, 0, 1) }}" 
+                                         src="{{ $pandit->profile_image ? asset('/' . $pandit->profile_image) : 'https://placehold.co/40x40/FFDDC1/FF7B00?text=' . substr($pandit->name, 0, 1) }}" 
                                          alt="{{ $pandit->name }}">
                                 </div>
                                 <div class="ml-4">

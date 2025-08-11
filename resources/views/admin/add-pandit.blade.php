@@ -3,6 +3,25 @@
 @section('title', 'Add New Pandit')
 
 @section('content')
+
+
+{{-- ✅ Success Message --}}
+    @if(session('success'))
+        <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    {{-- ✅ Error Messages --}}
+    @if($errors->any())
+        <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+            <ul class="list-disc pl-5">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="mb-6">
         <div class="flex items-center space-x-2">
             <a href="{{ route('admin.dashboard') }}" class="text-gray-600 hover:text-orange-500">
@@ -26,18 +45,18 @@
                         </div>
                         <p class="mt-2 text-sm text-gray-600">Click to upload images</p>
                         <p class="text-xs text-gray-500">PNG, JPG up to 5MB (Max. 5 images)</p>
-                        <input type="file" name="pandit_images[]" multiple class="hidden" id="pandit-images">
+                        <input type="file" name="profile_image" multiple class="hidden" id="pandit-images">
                     </div>
                 </div>
 
                 <div>
                     <label for="pandit_name" class="block text-sm font-medium text-gray-700 mb-2">Pandit Name</label>
-                    <input type="text" id="pandit_name" name="pandit_name" placeholder="Enter the pandit name" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    <input type="text" id="pandit_name" name="name" placeholder="Enter the pandit name" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500">
                 </div>
 
                 <div>
                     <label for="specialized_in" class="block text-sm font-medium text-gray-700 mb-2">Specialized In</label>
-                    <input type="text" id="specialized_in" name="specialized_in" placeholder="Enter the skills" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    <input type="text" id="specialized_in" name="specialization" placeholder="Enter the skills" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500">
                 </div>
 
                 <div>
