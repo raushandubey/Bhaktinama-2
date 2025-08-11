@@ -78,7 +78,6 @@
                         @enderror
                     </div>
 
-                    <!-- Location -->
                     <!-- Location (State Dropdown) -->
                     <div>
                         <label for="location" class="block text-sm font-medium text-gray-700 mb-2">Location (State)</label>

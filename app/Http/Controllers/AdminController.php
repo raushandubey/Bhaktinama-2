@@ -125,7 +125,19 @@ class AdminController extends Controller
 
     public function createPandit()
     {
-        return view('admin.add-pandit');
+        
+        $response = Http::post('https://countriesnow.space/api/v0.1/countries/states', [
+            'country' => 'India'
+        ]);
+
+        $states = [];
+        if ($response->successful()) {
+            $data = $response->json();
+            if (isset($data['data']['states'])) {
+                $states = collect($data['data']['states'])->pluck('name');
+            }
+        }
+        return view('admin.add-pandit', compact('states'));
     }
 
     public function storePandit(Request $request)
