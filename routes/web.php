@@ -32,6 +32,8 @@ Route::post('/panditregister', [PanditController::class, 'register'])->name('pan
 // Pandit Dashboard Routes (Protected)
 Route::middleware(['auth:pandit'])->prefix('pandit')->name('pandit.')->group(function () {
     Route::get('/dashboard', [PanditController::class, 'dashboard'])->name('dashboard');
+        Route::post('/pandit/change-password', [PanditController::class, 'changePassword'])->name('changePassword');
+
     Route::get('/bookings', [PanditController::class, 'bookings'])->name('bookings');
     Route::get('/profile', [PanditController::class, 'profile'])->name('profile');
     Route::put('/profile', [PanditController::class, 'updateProfile'])->name('profile.update');
@@ -46,7 +48,7 @@ Route::post('/adminlogin', [AdminController::class, 'login'])->name('admin.login
 Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
-    
+
     // User Management
     Route::get('/users', [AdminController::class, 'users'])->name('users');
     Route::patch('/users/{id}/toggle-status', [AdminController::class, 'toggleUserStatus'])->name('users.toggle-status');
