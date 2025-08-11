@@ -15,6 +15,7 @@ use App\Models\Product;
 use App\Models\Temple;
 use App\Models\Service;
 use App\Models\Blog;
+use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
 {
@@ -147,7 +148,9 @@ class AdminController extends Controller
         $profileImagePath = null;
         if ($request->hasFile('profile_image')) {
             $imageName = time() . '.' . $request->profile_image->extension();
-            $request->profile_image->move(public_path('images/pandits'), $imageName
+            $request->profile_image->move(
+                public_path('images/pandits'),
+                $imageName
             );
             $profileImagePath = 'images/pandits/' . $imageName;
         }
@@ -290,7 +293,19 @@ class AdminController extends Controller
 
     public function createService()
     {
-        return view('admin.add-service');
+       
+        $response = Http::post('https://countriesnow.space/api/v0.1/countries/states', [
+            'country' => 'India'
+        ]);
+
+        $states = [];
+        if ($response->successful()) {
+            $data = $response->json();
+            if (isset($data['data']['states'])) {
+                $states = collect($data['data']['states'])->pluck('name');
+            }
+        }
+        return view('admin.add-service', compact('states'));
     }
 
     public function storeService(Request $request)
