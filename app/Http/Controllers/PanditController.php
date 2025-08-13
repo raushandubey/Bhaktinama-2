@@ -151,7 +151,7 @@ class PanditController extends Controller
     {
         return view('pandit.aa');
     }
-    public function current()
+    public function home()
     {
         return view('newPandit.home');
     }
