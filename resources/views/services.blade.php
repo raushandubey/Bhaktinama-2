@@ -120,12 +120,14 @@
 
         @foreach($services as $item)   
                 <!-- Service Item 1: Annaprashan Sanskar Puja -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                    <img src="{{ asset('uploads/' . $item->image) }}" alt="Annaprashan Sanskar Puja" class="w-full h-48 object-cover rounded-t-lg">
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold">{{$item->title}}</h3>
+                <a href="{{ route('aa') }}" class="block">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
+                        <img src="{{ asset('uploads/' . $item->image) }}" alt="{{$item->title}}" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold">{{$item->title}}</h3>
+                        </div>
                     </div>
-                </div>
+                </a>
                 
                 @endforeach
             </div>

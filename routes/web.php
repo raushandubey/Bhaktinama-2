@@ -22,6 +22,7 @@ Route::get('/astrology',[UserController::class,'astrology'])->name("astrology");
 Route::get('/temple',[UserController::class,'temple'])->name("temple");
 Route::get('/kundalini',[UserController::class,'kundalini'])->name("kundalini");
 Route::get('/annaprashan',[UserController::class,'annaprashan'])->name("annaprashan");
+Route::get('/aa',[UserController::class,'aa'])->name("aa");
 
 // Pandit Authentication Routes
 Route::get('/panditlogin', [PanditController::class, 'showLoginForm'])->name('panditlogin');

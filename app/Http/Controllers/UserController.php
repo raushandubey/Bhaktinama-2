@@ -75,6 +75,10 @@ class UserController extends Controller
        
         return view("kundalini");
     }
+     function aa() {
+       
+        return view("aa");
+    }
 
     function annaprashan() {
         return view("annaprashan");
