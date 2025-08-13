@@ -10,8 +10,8 @@ use App\Http\Controllers\PanditController;
 
 
 
-Route::get('/aa',[PanditController::class,'aa'])->name("aa");
-Route::get('/curent',[PanditController::class,'current'])->name("curent");
+Route::get('/profile-pandit',[PanditController::class,'profilePandit'])->name("profile");
+Route::get('/home',[PanditController::class,'home'])->name("curent");
 
 // Frontend Routes
 Route::get('/',[UserController::class,'index'])->name("homepage");
