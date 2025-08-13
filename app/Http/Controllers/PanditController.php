@@ -147,4 +147,12 @@ class PanditController extends Controller
 
         return back()->with('success', 'Password changed successfully.');
     }
+    public function aa()
+    {
+        return view('pandit.aa');
+    }
+    public function current()
+    {
+        return view('newPandit.home');
+    }
 }

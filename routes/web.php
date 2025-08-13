@@ -5,6 +5,14 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PanditController;
 
+
+
+
+
+
+Route::get('/aa',[PanditController::class,'aa'])->name("aa");
+Route::get('/curent',[PanditController::class,'current'])->name("curent");
+
 // Frontend Routes
 Route::get('/',[UserController::class,'index'])->name("homepage");
 Route::get('/services',[UserController::class,'services'])->name("services");
