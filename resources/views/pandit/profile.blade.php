@@ -95,9 +95,9 @@
             <h2 class="text-lg font-semibold text-gray-900">Change Password</h2>
         </div>
         <div class="p-6">
-            <form action="#" method="POST" class="space-y-6">
+            <form action="{{ route('pandit.changePassword') }}" method="POST" class="space-y-6">
                 @csrf
-                @method('PUT')
+               
                 
                 <div>
                     <label for="current_password" class="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
